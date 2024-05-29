@@ -1,13 +1,37 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom theme styles */
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body.light {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+body.dark {
+  --background-color: #000000;
+  --text-color: #ffffff;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Poppins', sans-serif; /* Set font family to Poppins */
+}
+
+.main-content {
+  padding-top: 4rem; /* Adjust this value based on the height of your header */
+}
+@media (max-width: 640px) {
+  .flex-grow {
+    flex-direction: column;
+    align-items: center;
+  }
 }
