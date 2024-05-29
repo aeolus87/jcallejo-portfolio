@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Header from './Pages/Header';
-import Home from './Pages/Home';
+import Header from './components/Pages/Header';
+import Home from './components/Pages/Home';
 import './index.css';
 
 function App() {
