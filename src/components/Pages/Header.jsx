@@ -77,7 +77,15 @@ const MobileNavbar = ({ toggleMenu, showMenu, theme, toggleTheme }) => (
 );
 
 const MobileMenu = ({ showMenu }) => (
-  <div className="sm:hidden absolute top-16 right-0 shadow-md py-4" style={{ transition: 'right 0.5s', right: showMenu ? 0 : '-100%', width: '40%', textAlign: 'center' }}>
+  <div
+    className={`sm:hidden fixed top-16 right-0 shadow-md py-4 transition-right duration-500 ${
+      showMenu ? 'w-2/5' : 'w-0'
+    }`}
+    style={{
+      right: showMenu ? 0 : '-200%',
+      textAlign: 'center',
+    }}
+  >
     <div className="flex flex-col items-center space-y-4">
       <NavItem href="home.jsx">Home</NavItem>
       <NavItem href="about.jsx">About</NavItem>
