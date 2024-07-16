@@ -21,7 +21,7 @@ function About({ theme }) {
 
   return (
     <motion.div
-      className="min-h-screen py-16 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen py-8 px-4 lg:px-8 lg:top-0"
       variants={containerVariants}
       initial="hidden"
       animate="visible"

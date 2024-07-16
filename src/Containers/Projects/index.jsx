@@ -6,19 +6,19 @@ import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 const projectData = [
   {
     id: 1,
-    title: "Project 1",
-    description: "This is a description of Project 1",
-    image: "https://via.placeholder.com/300",
-    link: "https://project1.com",
+    title: "yEZDL",
+    description: "A YouTube Video Crop and Download Tool",
+    image: "/img/yezdl-logo.png",
+    link: "https://yezdl.com",
   },
   {
     id: 2,
-    title: "Project 2",
-    description: "This is a description of Project 2",
-    image: "https://via.placeholder.com/300",
-    link: "https://project2.com",
+    title: "NaviGenius",
+    description: "A GPS Website with Realtime Tracking",
+    image: "/img/navigenius.png", // You should replace this with an actual image of NaviGenius
+    link: "https://navigenius.live",
   },
-  // Add more projects as needed
+  // You can add more projects here if needed
 ];
 
 const Projects = ({ theme }) => {

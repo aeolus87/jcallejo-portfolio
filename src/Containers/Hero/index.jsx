@@ -19,7 +19,7 @@ function Home({ theme }) {
     >
       <div className="flex lg:flex-row flex-col w-full relative items-center justify-center lg:px-4">
         <motion.div
-          className="hero-box p-4 lg:p-8 border-4 border-transparent rounded-lg shadow-lg bg-transparent backdrop-filter backdrop-blur-lg mb-8 lg:mb-0"
+          className="hero-box p-4 lg:p-8 border-4 border-transparent rounded-lg shadow-lg bg-transparent backdrop-filter backdrop-blur-lg mb-8 lg:mb-0 lg:mt-0 mt-48"
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -53,7 +53,7 @@ function Home({ theme }) {
           </div>
           <div className="flex justify-center space-x-4 mt-4">
             <motion.a
-              href="https://www.linkedin.com/in/your-profile"
+              href="https://www.linkedin.com/in/jcallejo/"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.2 }}
@@ -65,7 +65,7 @@ function Home({ theme }) {
               />
             </motion.a>
             <motion.a
-              href="https://github.com/your-profile"
+              href="https://github.com/aeolus87"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.2 }}
@@ -82,15 +82,15 @@ function Home({ theme }) {
 
       {/* New button to About page */}
       <motion.div
-        className="absolute right-8 top-1/2 transform -translate-y-1/2"
+        className="fixed right-8 lg:top-1/2 bottom-24 transform -translate-y-1/2"
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}
       >
         <motion.button
           onClick={() => navigate("/about")}
-          className={`absolute right-8 top-1/2 transform -translate-y-1/2 px-6 py-3 rounded-full flex items-center text-2xl ${
-            theme === "light" ? " text-white" : " text-cyan-300"
+          className={`px-6 py-3 rounded-full flex items-center text-2xl ${
+            theme === "light" ? "text-white" : "text-cyan-300"
           } shadow-xl`}
         >
           <MdOutlineKeyboardDoubleArrowRight />
