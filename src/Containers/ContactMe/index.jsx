@@ -79,15 +79,11 @@ const Contact = ({ theme }) => {
             <div className="space-y-4">
               <div className="flex items-center">
                 <FaEnvelope className="mr-2" />
-                <span>email@example.com</span>
-              </div>
-              <div className="flex items-center">
-                <FaPhone className="mr-2" />
-                <span>+1 234 567 8900</span>
+                <span>callejojuls@gmail.com</span>
               </div>
               <div className="flex items-center">
                 <FaMapMarkerAlt className="mr-2" />
-                <span>123 Web Dev Street, Coding City, 12345</span>
+                <span>Balingasa, Quezon City, 1115</span>
               </div>
             </div>
           </div>
