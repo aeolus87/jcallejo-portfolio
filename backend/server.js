@@ -1,4 +1,3 @@
-//backend/server.js
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -15,36 +14,50 @@ const port = process.env.PORT || 5000;
 // Connect to MongoDB
 connectDB();
 
+// CORS configuration
+const corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
 // Middleware
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
-app.use(express.json({ limit: "10kb" })); // Limit JSON body size
+app.use(cors(corsOptions));
+app.use(express.json({ limit: "10kb" }));
 app.use(cookieParser());
 app.use(helmet());
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000,
+  max: 100,
   message: "Too many requests from this IP, please try again later",
 });
 app.use("/api", limiter);
 
 // CSRF protection
-const csrfProtection = csrf({ cookie: true });
-app.use(csrfProtection);
+const csrfProtection = csrf({
+  cookie: {
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  },
+});
 
 // Routes
 app.use("/api/contact", contactRoutes);
 
 // CSRF token route
-app.get("/api/csrf-token", (req, res) => {
+app.get("/api/csrf-token", csrfProtection, (req, res) => {
   res.json({ csrfToken: req.csrfToken() });
 });
 
 // Global error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send("Something broke!");
+  if (err.code === "EBADCSRFTOKEN") {
+    return res.status(403).json({ message: "Invalid CSRF token" });
+  }
+  res.status(500).json({ message: "Something went wrong!" });
 });
 
 app.listen(port, () => {

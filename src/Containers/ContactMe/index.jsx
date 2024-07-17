@@ -40,7 +40,7 @@ const Contact = ({ theme }) => {
     (e) => {
       e.preventDefault();
 
-      fetch(`${process.env.REACT_APP_API_URL}/api/csrf-token`, {
+      fetch(`${process.env.REACT_APP_API_URL}/api/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
