@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   FaEnvelope,
@@ -19,11 +19,20 @@ const Contact = ({ theme }) => {
     email: "",
     message: "",
   });
+  const [csrfToken, setCsrfToken] = useState("");
 
-  // Use useCallback to memoize the function
+  useEffect(() => {
+    // Fetch CSRF token when component mounts
+    fetch(`${process.env.REACT_APP_API_URL}/api/csrf-token`, {
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => setCsrfToken(data.csrfToken))
+      .catch((error) => console.error("Error fetching CSRF token:", error));
+  }, []);
+
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
-    // Sanitize input
     const sanitizedValue = DOMPurify.sanitize(value);
     setFormData((prevData) => ({ ...prevData, [name]: sanitizedValue }));
   }, []);
@@ -31,26 +40,25 @@ const Contact = ({ theme }) => {
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      // Implement CSRF protection (assuming you have a CSRF token)
-      const csrfToken = document
-        .querySelector('meta[name="csrf-token"]')
-        .getAttribute("content");
 
-      // Use fetch with appropriate headers and method
-      fetch("/api/contact", {
+      fetch(`${process.env.REACT_APP_API_URL}/api/csrf-token`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-CSRF-Token": csrfToken,
+          "CSRF-Token": csrfToken,
         },
         body: JSON.stringify(formData),
-        credentials: "same-origin", // This is important for including cookies
+        credentials: "include",
       })
         .then((response) => response.json())
-        .then((data) => console.log("Success:", data))
+        .then((data) => {
+          console.log("Success:", data);
+          // Reset form after successful submission
+          setFormData({ name: "", email: "", message: "" });
+        })
         .catch((error) => console.error("Error:", error));
     },
-    [formData]
+    [formData, csrfToken]
   );
 
   const inputClass = `w-full p-3 rounded border ${
