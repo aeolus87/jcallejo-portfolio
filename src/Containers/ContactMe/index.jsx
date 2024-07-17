@@ -10,6 +10,56 @@ import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 
+const SuccessModal = ({ isVisible, theme }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.5 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 flex items-center justify-center z-50"
+    >
+      <div
+        className={`rounded-lg p-8 shadow-2xl ${
+          theme === "light" ? "bg-white" : "bg-gray-800"
+        }`}
+      >
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+        >
+          <svg
+            className="w-16 h-16 text-green-500 mx-auto"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <motion.path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            />
+          </svg>
+        </motion.div>
+        <motion.p
+          className={`text-xl font-semibold text-center mt-4 ${
+            theme === "light" ? "text-gray-800" : "text-white"
+          }`}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          Message Sent Successfully!
+        </motion.p>
+      </div>
+    </motion.div>
+  );
+};
+
 const Contact = ({ theme }) => {
   const navigate = useNavigate();
   const { scrollY } = useScroll();
@@ -20,6 +70,7 @@ const Contact = ({ theme }) => {
     message: "",
   });
   const [csrfToken, setCsrfToken] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/api/csrf-token`, {
@@ -52,8 +103,9 @@ const Contact = ({ theme }) => {
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
-          // Reset form after successful submission
           setFormData({ name: "", email: "", message: "" });
+          setIsSuccess(true);
+          setTimeout(() => setIsSuccess(false), 3000);
         })
         .catch((error) => console.error("Error:", error));
     },
@@ -222,6 +274,7 @@ const Contact = ({ theme }) => {
           <MdOutlineKeyboardDoubleArrowRight />
         </motion.button>
       </motion.div>
+      <SuccessModal isVisible={isSuccess} theme={theme} />
     </motion.div>
   );
 };
