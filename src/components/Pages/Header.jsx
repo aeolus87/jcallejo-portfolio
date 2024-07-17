@@ -67,7 +67,7 @@ const DesktopNavbar = ({ theme, toggleTheme, scrollPosition }) => {
   const location = useLocation();
 
   return (
-    <motion.nav className="flex justify-between items-center z-50 w-full top-0 left-0 h-16 px-12 bg-[#00000029]">
+    <motion.nav className="flex justify-between items-center z-50 w-full top-0 left-0 h-16 px-12">
       <div className="flex items-center">
         <motion.h2 className="m-0 font-bold text-2xl">
           jcallejo.
@@ -236,7 +236,7 @@ const NavItem = ({ to, children, icon, setShowMenu, isActive, theme }) => (
       className={`font-semibold p-2 px-4 group flex items-center transition-colors duration-300 
         ${
           isActive
-            ? "text-cyan-500 border-b-2 border-cyan-500"
+            ? "border-b-2 border-cyan-500"
             : theme === "light"
             ? "text-black hover:text-cyan-500"
             : "text-white hover:text-cyan-500"

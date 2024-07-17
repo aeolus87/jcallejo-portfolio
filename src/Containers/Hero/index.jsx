@@ -47,7 +47,7 @@ function Home({ theme }) {
       animate="visible"
       exit="hidden"
       variants={containerVariants}
-      className="lg:min-h-[85vh] flex flex-col lg:flex-row relative overflow-hidden z-0 lg:px-36 lg:py-0 lg:mt-[-2rem] px-8 py-8 mt-[-4rem]"
+      className="lg:min-h-[85vh] flex flex-col lg:flex-row relative overflow-hidden z-0 lg:px-36 lg:py-0 lg:mt-[-4rem] px-8 py-8 mt-[-4rem]"
     >
       <motion.div
         className="lg:w-1/2 flex flex-col justify-center items-center lg:items-start"
@@ -179,7 +179,7 @@ function Home({ theme }) {
       </motion.div>
 
       <motion.div
-        className="fixed right-4 top-[30.3rem] lg:transform lg:-translate-y-1/2"
+        className="fixed right-6 top-1/2 lg:transform lg:-translate-y-1/2"
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}

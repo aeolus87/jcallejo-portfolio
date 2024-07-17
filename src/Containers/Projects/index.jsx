@@ -49,7 +49,7 @@ const Projects = ({ theme }) => {
       animate="visible"
       exit="hidden"
       variants={containerVariants}
-      className="min-h-screen lg:py-16 px-4 lg:px-6"
+      className="min-h-screen lg:py-16 px-4 lg:px-6 lg:mt-[-6rem] mt-[-2rem]"
     >
       <motion.h1
         variants={itemVariants}
@@ -98,7 +98,7 @@ const Projects = ({ theme }) => {
       </motion.div>
 
       <motion.div
-        className="fixed right-4 top-[30.3rem] lg:transform lg:-translate-y-1/2"
+        className="fixed right-6 top-1/2 lg:transform lg:-translate-y-1/2"
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}

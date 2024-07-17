@@ -5,6 +5,7 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
+import LoadingScreen from "./components/LoadingAnimation";
 import { AnimatePresence } from "framer-motion";
 import Header from "./components/Pages/Header";
 import Home from "./Containers/Hero";
@@ -27,8 +28,10 @@ function AnimatedRoutes({ theme }) {
     </AnimatePresence>
   );
 }
+
 function App() {
-  const [theme, setTheme] = useState("dark"); // Set initial state to "dark"
+  const [theme, setTheme] = useState("dark");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -52,11 +55,17 @@ function App() {
   return (
     <Router>
       <div className={`app ${theme}`}>
-        <div className="background-animation"></div>
-        <Header theme={theme} toggleTheme={toggleTheme} />
-        <div className="main-content">
-          <AnimatedRoutes theme={theme} />
-        </div>
+        {isLoading ? (
+          <LoadingScreen setLoading={setIsLoading} />
+        ) : (
+          <>
+            <div className="background-animation"></div>
+            <Header theme={theme} toggleTheme={toggleTheme} />
+            <div className="main-content">
+              <AnimatedRoutes theme={theme} />
+            </div>
+          </>
+        )}
       </div>
     </Router>
   );
