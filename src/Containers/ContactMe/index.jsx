@@ -22,7 +22,6 @@ const Contact = ({ theme }) => {
   const [csrfToken, setCsrfToken] = useState("");
 
   useEffect(() => {
-    // Fetch CSRF token when component mounts
     fetch(`${process.env.REACT_APP_API_URL}/api/csrf-token`, {
       credentials: "include",
     })
