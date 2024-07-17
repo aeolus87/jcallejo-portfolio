@@ -13,7 +13,6 @@ import About from "./Containers/About";
 import Projects from "./Containers/Projects";
 import Contact from "./Containers/ContactMe";
 import "./index.css";
-
 function AnimatedRoutes({ theme }) {
   const location = useLocation();
 

@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Satoshi";
+  src: url("../public/fonts/Satoshi.ttf") format("truetype");
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,7 +29,7 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
-  font-family: "Poppins", sans-serif;
+  font-family: "Satoshi", sans-serif;
 }
 
 #root {

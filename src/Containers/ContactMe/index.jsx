@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   FaEnvelope,
@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import DOMPurify from "dompurify";
 
 const Contact = ({ theme }) => {
   const navigate = useNavigate();
@@ -19,14 +20,38 @@ const Contact = ({ theme }) => {
     message: "",
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  // Use useCallback to memoize the function
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target;
+    // Sanitize input
+    const sanitizedValue = DOMPurify.sanitize(value);
+    setFormData((prevData) => ({ ...prevData, [name]: sanitizedValue }));
+  }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-  };
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      // Implement CSRF protection (assuming you have a CSRF token)
+      const csrfToken = document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
+
+      // Use fetch with appropriate headers and method
+      fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify(formData),
+        credentials: "same-origin", // This is important for including cookies
+      })
+        .then((response) => response.json())
+        .then((data) => console.log("Success:", data))
+        .catch((error) => console.error("Error:", error));
+    },
+    [formData]
+  );
 
   const inputClass = `w-full p-3 rounded border ${
     theme === "light"
@@ -35,8 +60,8 @@ const Contact = ({ theme }) => {
   } focus:ring-2 focus:ring-blue-500 transition duration-300`;
 
   const socialLinks = [
-    { icon: FaLinkedin, url: "https://www.linkedin.com/in/your-profile" },
-    { icon: FaGithub, url: "https://github.com/your-username" },
+    { icon: FaLinkedin, url: "https://www.linkedin.com/in/jcallejo" },
+    { icon: FaGithub, url: "https://github.com/aeolus87" },
   ];
 
   return (
@@ -77,6 +102,8 @@ const Contact = ({ theme }) => {
                   onChange={handleChange}
                   className={inputClass}
                   required
+                  maxLength={100}
+                  pattern="[A-Za-z\s]+"
                 />
               </motion.div>
               <motion.div
@@ -91,6 +118,7 @@ const Contact = ({ theme }) => {
                   onChange={handleChange}
                   className={inputClass}
                   required
+                  maxLength={100}
                 />
               </motion.div>
               <motion.div
@@ -104,6 +132,7 @@ const Contact = ({ theme }) => {
                   onChange={handleChange}
                   className={`${inputClass} h-32 resize-none`}
                   required
+                  maxLength={1000}
                 ></textarea>
               </motion.div>
               <motion.button
