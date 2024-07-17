@@ -11,14 +11,19 @@ import { useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 
 const SuccessModal = ({ isVisible, theme }) => {
+  if (!isVisible) return null;
+
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.5 }}
-      transition={{ duration: 0.3 }}
-      className="fixed inset-0 flex items-center justify-center z-50"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
     >
-      <div
+      <motion.div
+        initial={{ scale: 0.5, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.3 }}
         className={`rounded-lg p-8 shadow-2xl ${
           theme === "light" ? "bg-white" : "bg-gray-800"
         }`}
@@ -55,11 +60,10 @@ const SuccessModal = ({ isVisible, theme }) => {
         >
           Message Sent Successfully!
         </motion.p>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
-
 const Contact = ({ theme }) => {
   const navigate = useNavigate();
   const { scrollY } = useScroll();
@@ -105,13 +109,15 @@ const Contact = ({ theme }) => {
           console.log("Success:", data);
           setFormData({ name: "", email: "", message: "" });
           setIsSuccess(true);
-          setTimeout(() => setIsSuccess(false), 3000);
+          setTimeout(() => setIsSuccess(false), 3000); // Show success message for 3 seconds
         })
-        .catch((error) => console.error("Error:", error));
+        .catch((error) => {
+          console.error("Error:", error);
+          // You might want to show an error message to the user here
+        });
     },
     [formData, csrfToken]
   );
-
   const inputClass = `w-full p-3 rounded border ${
     theme === "light"
       ? "bg-white border-gray-300"
