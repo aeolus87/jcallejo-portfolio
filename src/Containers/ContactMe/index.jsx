@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 const Contact = ({ theme }) => {
   const navigate = useNavigate();
-
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 100], [1, 0]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -90,15 +91,20 @@ const Contact = ({ theme }) => {
         </div>
       </div>
       <motion.div
-        className="fixed right-8 top-1/2 transform -translate-y-1/2"
+        className="fixed right-4 top-[30.3rem] lg:transform lg:-translate-y-1/2"
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}
+        style={{ opacity }}
       >
         <motion.button
           onClick={() => navigate("/")}
-          className={`px-6 py-3 rounded-full flex items-center justify-center text-2xl ${
-            theme === "light" ? " text-white" : " text-cyan-300"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className={`lg:px-6 px-3 py-3 rounded-full flex items-center text-2xl ${
+            theme === "light"
+              ? "bg-blue-500 text-white"
+              : "bg-blue-300 text-gray-800"
           } shadow-xl`}
         >
           <MdOutlineKeyboardDoubleArrowRight />

@@ -1,11 +1,22 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { FaHtml5, FaCss3Alt, FaJs, FaReact } from "react-icons/fa";
+import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+  FaNodeJs,
+  FaGitAlt,
+} from "react-icons/fa";
+import { SiTailwindcss, SiMongodb } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 
 function About({ theme }) {
   const navigate = useNavigate();
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 100], [1, 0]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -19,14 +30,25 @@ function About({ theme }) {
     visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
   };
 
+  const skills = [
+    { Icon: FaHtml5, name: "HTML5", color: "text-orange-500" },
+    { Icon: FaCss3Alt, name: "CSS3", color: "text-blue-500" },
+    { Icon: FaJs, name: "JavaScript", color: "text-yellow-500" },
+    { Icon: FaReact, name: "React", color: "text-blue-400" },
+    { Icon: FaNodeJs, name: "Node.js", color: "text-green-500" },
+    { Icon: SiTailwindcss, name: "Tailwind CSS", color: "text-cyan-400" },
+    { Icon: FaGitAlt, name: "Git", color: "text-red-500" },
+    { Icon: SiMongodb, name: "MongoDB", color: "text-green-600" },
+  ];
+
   return (
     <motion.div
-      className="min-h-screen py-8 px-4 lg:px-8 lg:top-0"
+      className="min-h-screen py-8 px-4 lg:px-8 mt-[-4rem]"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <motion.h1
           className="text-4xl font-bold mb-8 text-center"
           variants={itemVariants}
@@ -36,74 +58,72 @@ function About({ theme }) {
 
         <motion.section className="mb-12" variants={itemVariants}>
           <h2 className="text-2xl font-semibold mb-4">Who I Am</h2>
-          <p>
-            I am Julius Callejo, a passionate and dedicated student web
-            developer. Currently pursuing my degree in Computer Science, I have
-            a strong foundation in web development technologies including HTML,
-            CSS, JavaScript, and React. My goal is to create intuitive and
-            dynamic user experiences. I enjoy problem-solving and continuously
-            learning new skills to stay up-to-date with the latest industry
-            trends.
+          <p className="text-lg">
+            I'm Julius Callejo, a passionate student web developer currently
+            pursuing a degree in Computer Science. With a strong foundation in
+            web technologies, I'm dedicated to creating intuitive and dynamic
+            user experiences. I thrive on problem-solving and continuously
+            expanding my skill set to stay at the forefront of industry trends.
           </p>
         </motion.section>
 
         <motion.section className="mb-12" variants={itemVariants}>
           <h2 className="text-2xl font-semibold mb-4">My Skills</h2>
-          <div className="flex justify-around">
-            <motion.div whileHover={{ scale: 1.1 }} className="text-center">
-              <FaHtml5 className="text-5xl mb-2 text-orange-500" />
-              <p>HTML5</p>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.1 }} className="text-center">
-              <FaCss3Alt className="text-5xl mb-2 text-blue-500" />
-              <p>CSS3</p>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.1 }} className="text-center">
-              <FaJs className="text-5xl mb-2 text-yellow-500" />
-              <p>JavaScript</p>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.1 }} className="text-center">
-              <FaReact className="text-5xl mb-2 text-blue-400" />
-              <p>React</p>
-            </motion.div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+            {skills.map(({ Icon, name, color }) => (
+              <motion.div
+                key={name}
+                whileHover={{ scale: 1.1 }}
+                className="text-center"
+              >
+                <Icon className={`text-5xl mb-2 ${color} mx-auto`} />
+                <p>{name}</p>
+              </motion.div>
+            ))}
           </div>
         </motion.section>
 
         <motion.section className="mb-12" variants={itemVariants}>
           <h2 className="text-2xl font-semibold mb-4">My Journey</h2>
-          <p>
-            My journey in web development began with a curiosity for creating
-            interactive and beautiful websites. As I progressed in my Computer
-            Science degree, I discovered my passion for front-end development.
-            I've worked on various projects, from simple landing pages to
-            complex web applications, always striving to improve my skills and
-            learn new technologies.
+          <p className="text-lg">
+            My web development journey began with a fascination for creating
+            interactive and visually appealing websites. As I progressed in my
+            Computer Science studies, I discovered my passion for front-end
+            development. I've tackled various projects, ranging from simple
+            landing pages to complex web applications, always pushing myself to
+            improve and adopt new technologies.
           </p>
         </motion.section>
 
         <motion.section variants={itemVariants}>
           <h2 className="text-2xl font-semibold mb-4">My Goals</h2>
-          <p>
-            As I continue to grow as a web developer, my goal is to create web
-            applications that not only look great but also provide exceptional
-            user experiences. I'm particularly interested in exploring the
-            intersection of web development and emerging technologies like AI
-            and machine learning. I'm excited about the future of web
-            development and can't wait to contribute to innovative projects that
-            push the boundaries of what's possible on the web.
+          <p className="text-lg">
+            As I continue to evolve as a web developer, my aim is to create web
+            applications that not only look stunning but also deliver
+            exceptional user experiences. I'm particularly intrigued by the
+            convergence of web development with emerging technologies like AI
+            and machine learning. The future of web development excites me, and
+            I'm eager to contribute to innovative projects that push the
+            boundaries of what's achievable on the web.
           </p>
         </motion.section>
       </div>
+
       <motion.div
-        className="fixed right-8 top-1/2 transform -translate-y-1/2"
+        className="fixed right-4 top-[30.3rem] lg:transform lg:-translate-y-1/2"
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}
+        style={{ opacity }}
       >
         <motion.button
           onClick={() => navigate("/projects")}
-          className={`px-6 py-3 rounded-full flex items-center justify-center text-2xl ${
-            theme === "light" ? " text-white" : " text-cyan-300"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className={`lg:px-6 px-3 py-3 rounded-full flex items-center text-2xl ${
+            theme === "light"
+              ? "bg-blue-500 text-white"
+              : "bg-blue-300 text-gray-800"
           } shadow-xl`}
         >
           <MdOutlineKeyboardDoubleArrowRight />
@@ -112,4 +132,5 @@ function About({ theme }) {
     </motion.div>
   );
 }
+
 export default About;

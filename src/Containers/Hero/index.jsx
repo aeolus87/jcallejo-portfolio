@@ -1,96 +1,198 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ReactTyped } from "react-typed";
-import { FaLinkedin, FaGithub } from "react-icons/fa";
+import {
+  FaLinkedin,
+  FaGithub,
+  FaEnvelope,
+  FaQuoteLeft,
+  FaCode,
+} from "react-icons/fa";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import myPicture from "../../components/Pages/img/juls.png";
 
 function Home({ theme }) {
   const navigate = useNavigate();
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 100], [1, 0]);
+
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 1, staggerChildren: 0.3 } },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
+  };
+
+  const codeSnippets = [
+    "console.log('Hello, World!');",
+    "<div>Welcome to my portfolio!</div>",
+    "function greet() { return 'Hi there!'; }",
+    "const passion = 'Web Development';",
+    "// TODO: Create amazing websites",
+  ];
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1 }}
-      className="min-h-screen flex flex-col lg:flex-row relative overflow-hidden z-0"
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+      variants={containerVariants}
+      className="lg:min-h-[85vh] flex flex-col lg:flex-row relative overflow-hidden z-0 lg:px-36 lg:py-0 lg:mt-[-2rem] px-8 py-8 mt-[-4rem]"
     >
-      <div className="flex lg:flex-row flex-col w-full relative items-center justify-center lg:px-4">
-        <motion.div
-          className="hero-box p-4 lg:p-8 border-4 border-transparent rounded-lg shadow-lg bg-transparent backdrop-filter backdrop-blur-lg mb-8 lg:mb-0 lg:mt-0 mt-48"
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="flex flex-col items-center">
-            <motion.div
-              className="relative w-32 h-32 border-4 border-cyan-500 rounded-full overflow-hidden shadow-lg mb-4"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <img
-                src={myPicture}
-                alt="Julius Callejo"
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-            <div className="text-center">
-              <h2 className="text-2xl lg:text-4xl font-bold mb-3">
-                Greetings! I am
-              </h2>
-              <div className="overflow-hidden min-h-16">
-                <ReactTyped
-                  className="text-xl lg:text-2xl font-bold"
-                  strings={["Julius Callejo", "Web Developer"]}
-                  typeSpeed={100}
-                  backSpeed={120}
-                  loop
-                />
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-center space-x-4 mt-4">
-            <motion.a
-              href="https://www.linkedin.com/in/jcallejo/"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.8 }}
-            >
-              <FaLinkedin
-                size={24}
-                color={theme === "light" ? "#0077B5" : "#ffffff"}
-              />
-            </motion.a>
-            <motion.a
-              href="https://github.com/aeolus87"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.8 }}
-            >
-              <FaGithub
-                size={24}
-                color={theme === "light" ? "#333" : "#ffffff"}
-              />
-            </motion.a>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* New button to About page */}
       <motion.div
-        className="fixed right-8 lg:top-1/2 bottom-24 transform -translate-y-1/2"
+        className="lg:w-1/2 flex flex-col justify-center items-center lg:items-start"
+        variants={itemVariants}
+      >
+        <motion.div
+          className="relative w-40 h-40 border-4 border-cyan-500 rounded-full overflow-hidden shadow-lg mb-6"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <img
+            src={myPicture}
+            alt="Julius Callejo"
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
+        <h1 className="text-4xl lg:text-5xl font-bold mb-4">Julius Callejo</h1>
+        <div className="text-xl lg:text-2xl font-semibold mb-4">
+          <ReactTyped
+            strings={["Web Developer", "UI/UX Enthusiast", "Problem Solver"]}
+            typeSpeed={80}
+            backSpeed={50}
+            loop
+          />
+        </div>
+        <p className="text-lg mb-6 max-w-md text-center lg:text-left">
+          Turning ideas into interactive web experiences. Let's create something
+          extraordinary together!
+        </p>
+        <div className="flex space-x-4 mb-6">
+          <motion.a
+            href="https://www.linkedin.com/in/jcallejo/"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+            className={`p-2 rounded-full ${
+              theme === "light" ? "bg-gray-200" : "bg-gray-700"
+            }`}
+          >
+            <FaLinkedin
+              size={24}
+              color={theme === "light" ? "#0077B5" : "#ffffff"}
+            />
+          </motion.a>
+          <motion.a
+            href="https://github.com/aeolus87"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+            className={`p-2 rounded-full ${
+              theme === "light" ? "bg-gray-200" : "bg-gray-700"
+            }`}
+          >
+            <FaGithub
+              size={24}
+              color={theme === "light" ? "#333" : "#ffffff"}
+            />
+          </motion.a>
+          <motion.a
+            href="mailto:callejojuls@gmail.com"
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+            className={`p-2 rounded-full ${
+              theme === "light" ? "bg-gray-200" : "bg-gray-700"
+            }`}
+          >
+            <FaEnvelope
+              size={24}
+              color={theme === "light" ? "#EA4335" : "#ffffff"}
+            />
+          </motion.a>
+        </div>
+      </motion.div>
+
+      <motion.div
+        className="lg:w-1/2 mt-8 lg:mt-0 flex flex-col justify-center items-center lg:items-start"
+        variants={itemVariants}
+      >
+        <h2 className="text-2xl font-bold mb-4">Developer's Dashboard</h2>
+
+        <div
+          className={`p-6 rounded-lg shadow-lg ${
+            theme === "light" ? "bg-white" : "bg-gray-800"
+          } mb-6 w-full`}
+        >
+          <h3 className="text-xl font-semibold mb-2">Coding Time</h3>
+          <div className="text-4xl font-mono">
+            {currentTime.toLocaleTimeString()}
+          </div>
+          <p className="mt-2 text-sm">
+            {currentTime.toLocaleDateString(undefined, {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
+        </div>
+
+        <div
+          className={`p-6 rounded-lg shadow-lg ${
+            theme === "light" ? "bg-white" : "bg-gray-800"
+          } mb-6 w-full`}
+        >
+          <h3 className="text-xl font-semibold mb-2">Random Code Snippet</h3>
+          <div className="bg-gray-900 text-green-400 p-4 rounded font-mono">
+            <FaCode className="inline mr-2" />
+            {codeSnippets[Math.floor(Math.random() * codeSnippets.length)]}
+          </div>
+        </div>
+
+        <div className="text-center lg:text-left w-full">
+          <h3 className="text-xl font-semibold mb-2">Coding Philosophy</h3>
+          <div
+            className={`p-4 rounded-lg ${
+              theme === "light" ? "bg-gray-100" : "bg-gray-700"
+            }`}
+          >
+            <FaQuoteLeft className="text-2xl mb-2" />
+            <p className="italic">
+              "Clean code always looks like it was written by someone who
+              cares."
+            </p>
+            <p className="mt-2 text-right">- Robert C. Martin</p>
+          </div>
+        </div>
+      </motion.div>
+
+      <motion.div
+        className="fixed right-4 top-[30.3rem] lg:transform lg:-translate-y-1/2"
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}
+        style={{ opacity }}
       >
         <motion.button
           onClick={() => navigate("/about")}
-          className={`px-6 py-3 rounded-full flex items-center text-2xl ${
-            theme === "light" ? "text-white" : "text-cyan-300"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className={`lg:px-6 px-3 py-3 rounded-full flex items-center text-2xl ${
+            theme === "light"
+              ? "bg-blue-500 text-white"
+              : "bg-blue-300 text-gray-800"
           } shadow-xl`}
         >
           <MdOutlineKeyboardDoubleArrowRight />

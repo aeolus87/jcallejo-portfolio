@@ -28,12 +28,15 @@ function AnimatedRoutes({ theme }) {
   );
 }
 function App() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark"); // Set initial state to "dark"
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       setTheme(savedTheme);
+    } else {
+      setTheme("dark");
+      localStorage.setItem("theme", "dark");
     }
   }, []);
 

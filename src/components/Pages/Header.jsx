@@ -138,7 +138,7 @@ const MobileNavbar = ({
   scrollPosition,
 }) => (
   <motion.nav
-    className={`sm:hidden flex justify-between items-center w-full fixed top-0 left-0 h-16 px-4
+    className={`sm:hidden flex justify-between items-center w-full fixed top-0 left-0 h-16 px-4 z-10
       ${theme === "light" ? "text-black bg-white" : "text-white bg-gray-800"}`}
     style={{
       backgroundColor:
