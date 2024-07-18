@@ -179,7 +179,7 @@ function Home({ theme }) {
       </motion.div>
 
       <motion.div
-        className="fixed right-6 top-1/2 lg:transform lg:-translate-y-1/2"
+        className="fixed right-6 top-[57%] lg:transform lg:-translate-y-1/2"
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}
