@@ -46,27 +46,24 @@ body {
   height: 100%;
   background: linear-gradient(
     -45deg,
-    #ee3a037f,
-    #b50a4b9b,
+    rgb(210, 107, 76),
+    rgb(239, 99, 153),
     #23a5d5a2,
-    #035f4a99
+    #086fb8
   );
   background-size: 400% 400%;
-  animation: gradient 10s ease infinite;
+  animation: gradient 15s ease-in-out infinite;
 }
 
 @keyframes gradient {
-  0% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
     background-position: 100% 50%;
   }
-  100% {
-    background-position: 0% 50%;
-  }
 }
-
 .main-content {
   padding-top: 4rem; /* Adjust this value based on the height of your header */
 }
