@@ -7,12 +7,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  height: 100%;
-  overscroll-behavior-y: none;
-}
-
 :root {
   --background-color: #ffffff;
   --text-color: #121212;
@@ -59,7 +53,6 @@ body {
   );
   background-size: 400% 400%;
   animation: gradient 10s ease infinite;
-  will-change: background-position;
 }
 
 @keyframes gradient {
@@ -75,15 +68,16 @@ body {
 }
 
 .main-content {
-  padding-top: 4rem;
+  padding-top: 4rem; /* Adjust this value based on the height of your header */
 }
 
+/* styles.css */
 .min-w-40 {
-  min-width: 10rem;
+  min-width: 10rem; /* 160px */
 }
 
 .md\\:min-w-48 {
-  min-width: 12rem;
+  min-width: 12rem; /* 192px */
 }
 
 @media (max-width: 640px) {
