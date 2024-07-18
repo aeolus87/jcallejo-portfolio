@@ -67,7 +67,7 @@ const DesktopNavbar = ({ theme, toggleTheme, scrollPosition }) => {
   const location = useLocation();
 
   return (
-    <motion.nav className="hidden lg:flex justify-between fixed items-center z-50 w-full top-0 left-0 h-16 px-12">
+    <motion.nav className="hidden lg:flex justify-between items-center z-50 w-full top-0 left-0 h-16 px-12">
       <div className="flex items-center">
         <motion.h2 className="m-0 font-bold text-2xl">
           jcallejo.
@@ -177,7 +177,7 @@ const MobileMenu = ({ showMenu, setShowMenu, theme }) => {
       animate={{ x: 0 }}
       exit={{ x: "100%" }}
       transition={{ type: "tween", duration: 0.3 }}
-      className={`sm:hidden fixed top-16 w-full h-60 shadow-lg py-4 z-50 backdrop-blur-md bg-opacity-70 ${
+      className={`sm:hidden top-16 w-full h-60 shadow-lg py-4 z-50 backdrop-blur-md bg-opacity-70 ${
         theme === "light" ? "bg-[#fafafa5d]" : "bg-[#0000005d]"
       }`}
     >
