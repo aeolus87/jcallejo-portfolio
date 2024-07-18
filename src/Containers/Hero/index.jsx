@@ -47,7 +47,7 @@ function Home({ theme }) {
       animate="visible"
       exit="hidden"
       variants={containerVariants}
-      className="lg:min-h-[85vh] flex flex-col lg:flex-row relative overflow-hidden z-0 lg:px-36 lg:py-0 lg:mt-[-4rem] px-8 py-8 mt-[-4rem]"
+      className="lg:min-h-[85vh] flex flex-col lg:flex-row relative overflow-hidden z-0 lg:px-36 lg:py-0 lg:mt-0 mt-[-3rem] px-8 py-8"
     >
       <motion.div
         className="lg:w-1/2 flex flex-col justify-center items-center lg:items-start"

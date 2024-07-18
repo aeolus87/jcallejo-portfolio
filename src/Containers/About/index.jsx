@@ -43,7 +43,7 @@ function About({ theme }) {
 
   return (
     <motion.div
-      className="min-h-screen py-8 px-4 lg:px-8 mt-[-4rem]"
+      className="min-h-screen py-8 px-4 lg:px-8 lg:mt-0 mt-[-4rem]"
       variants={containerVariants}
       initial="hidden"
       animate="visible"

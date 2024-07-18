@@ -49,7 +49,7 @@ const Projects = ({ theme }) => {
       animate="visible"
       exit="hidden"
       variants={containerVariants}
-      className="min-h-screen lg:py-16 px-4 lg:px-6 lg:mt-[-6rem] mt-[-2rem]"
+      className="min-h-screen lg:py-16 px-4 lg:px-6 lg:mt-[-2rem  ] mt-[-2rem]"
     >
       <motion.h1
         variants={itemVariants}

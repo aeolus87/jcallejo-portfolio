@@ -135,7 +135,7 @@ const Contact = ({ theme }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen flex items-center justify-center py-16 px-4 lg:mt-[-9rem] mt-[-6rem]"
+      className="min-h-screen flex items-center justify-center py-16 px-4 lg:mt-[-7rem] mt-[-8rem]"
     >
       <div className="container max-w-4xl mx-auto">
         <motion.h1

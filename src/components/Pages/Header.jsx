@@ -67,7 +67,7 @@ const DesktopNavbar = ({ theme, toggleTheme, scrollPosition }) => {
   const location = useLocation();
 
   return (
-    <motion.nav className="flex justify-between items-center z-50 w-full top-0 left-0 h-16 px-12">
+    <motion.nav className="hidden lg:flex justify-between fixed items-center z-50 w-full top-0 left-0 h-16 px-12">
       <div className="flex items-center">
         <motion.h2 className="m-0 font-bold text-2xl">
           jcallejo.
@@ -138,13 +138,7 @@ const MobileNavbar = ({
   scrollPosition,
 }) => (
   <motion.nav
-    className={`sm:hidden flex justify-between items-center w-full fixed top-0 left-0 h-16 px-4 z-10
-      ${theme === "light" ? "text-black bg-white" : "text-white bg-gray-800"}`}
-    style={{
-      backgroundColor:
-        theme === "light" ? "rgba(255,255,255,1)" : "rgba(31, 41, 55, 1)",
-      boxShadow: scrollPosition > 50 ? "0 2px 10px rgba(0,0,0,0.1)" : "none",
-    }}
+    className={`sm:hidden flex justify-between items-center w-full top-0 left-0 h-16 px-4 z-10`}
   >
     <div className="flex items-center">
       <motion.h2 className="m-0 font-bold text-2xl">
@@ -157,7 +151,7 @@ const MobileNavbar = ({
     <div className="flex items-center space-x-4">
       <motion.button
         onClick={toggleTheme}
-        className={`py-2 px-4 border rounded-full focus:outline-none transition-colors duration-300 flex items-center justify-center
+        className={`py-2 px-4 border rounded-full focus:outline-none flex items-center justify-center
           ${theme === "light" ? "bg-black text-white" : "bg-white text-black"}`}
       >
         <FontAwesomeIcon icon={theme === "light" ? faMoon : faSun} />
@@ -183,8 +177,8 @@ const MobileMenu = ({ showMenu, setShowMenu, theme }) => {
       animate={{ x: 0 }}
       exit={{ x: "100%" }}
       transition={{ type: "tween", duration: 0.3 }}
-      className={`sm:hidden fixed top-16 w-full h-60 shadow-lg py-4 z-50 ${
-        theme === "light" ? "bg-white text-gray-800" : "bg-gray-800 text-white"
+      className={`sm:hidden fixed top-16 w-full h-60 shadow-lg py-4 z-50 backdrop-blur-md bg-opacity-70 ${
+        theme === "light" ? "bg-[#fafafa5d]" : "bg-[#0000005d]"
       }`}
     >
       <div className="flex flex-col items-center space-y-4">
@@ -233,7 +227,7 @@ const NavItem = ({ to, children, icon, setShowMenu, isActive, theme }) => (
   <motion.div onClick={() => setShowMenu && setShowMenu(false)}>
     <Link
       to={to}
-      className={`font-semibold p-2 px-4 group flex items-center transition-colors duration-300 
+      className={`font-semibold p-2 px-4 group flex items-center
         ${
           isActive
             ? "border-b-2 border-cyan-500"
