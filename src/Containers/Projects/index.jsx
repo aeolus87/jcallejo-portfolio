@@ -10,6 +10,7 @@ const projectData = [
     description: "A YouTube Video Crop and Download Tool",
     image: "/img/yezdl-logo.png",
     link: "https://yezdl.com",
+    status: "maintenance"
   },
   {
     id: 2,
@@ -17,6 +18,7 @@ const projectData = [
     description: "A GPS Website with Realtime Tracking",
     image: "/img/navigenius.png",
     link: "https://navigenius.live",
+    status: "active"
   },
 ];
 
@@ -49,7 +51,7 @@ const Projects = ({ theme }) => {
       animate="visible"
       exit="hidden"
       variants={containerVariants}
-      className="min-h-screen lg:py-16 px-4 lg:px-6 lg:mt-[-2rem  ] mt-[-2rem]"
+      className="min-h-screen lg:py-16 px-4 lg:px-6 lg:mt-[-2rem] mt-[-2rem]"
     >
       <motion.h1
         variants={itemVariants}
@@ -80,18 +82,30 @@ const Projects = ({ theme }) => {
             <div className="p-4">
               <h2 className="text-xl font-semibold mb-2">{project.title}</h2>
               <p className="mb-4">{project.description}</p>
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`inline-block px-4 py-2 rounded ${
-                  theme === "light"
-                    ? "bg-blue-500 text-white"
-                    : "bg-blue-300 text-gray-800"
-                }`}
-              >
-                View Project
-              </a>
+              {project.status === "active" ? (
+                
+                 <a href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-block px-4 py-2 rounded ${
+                    theme === "light"
+                      ? "bg-blue-500 text-white"
+                      : "bg-blue-300 text-gray-800"
+                  }`}
+                >
+                  View Project
+                </a>
+              ) : (
+                <span
+                  className={`inline-block px-4 py-2 rounded cursor-not-allowed ${
+                    theme === "light"
+                      ? "bg-gray-400 text-white"
+                      : "bg-gray-600 text-gray-300"
+                  }`}
+                >
+                  Under Maintenance
+                </span>
+              )}
             </div>
           </motion.div>
         ))}
