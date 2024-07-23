@@ -55,13 +55,13 @@ function About({ theme }) {
       title: "Who I Am",
       icon: FaUserGraduate,
       content:
-        "I'm Julius Callejo, a passionate student web developer currently pursuing a degree in Computer Science. With a strong foundation in web technologies, I'm dedicated to creating intuitive and dynamic user experiences. I thrive on problem-solving and continuously expanding my skill set to stay at the forefront of industry trends.",
+        "I'm Julius Callejo, a passionate student web developer currently pursuing a degree in Information Technology. With a strong foundation in web technologies, I'm dedicated to creating intuitive and dynamic user experiences. I thrive on problem-solving and continuously expanding my skill set to stay at the forefront of industry trends.",
     },
     {
       title: "My Journey",
       icon: FaRocket,
       content:
-        "My web development journey began with a fascination for creating interactive and visually appealing websites. As I progressed in my Computer Science studies, I discovered my passion for front-end development. I've tackled various projects, ranging from simple landing pages to complex web applications, always pushing myself to improve and adopt new technologies.",
+        "My web development journey began with a fascination for creating interactive and visually appealing websites. As I progressed in my Information Technology studies, I discovered my passion for front-end development. I've tackled various projects, ranging from simple landing pages to complex web applications, always pushing myself to improve and adopt new technologies.",
     },
     {
       title: "My Goals",
