@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer");
 const { body, validationResult } = require("express-validator");
 const xss = require("xss");
 
-// Validation middleware
+// Validation middlewares
 const validateContactInput = [
   body("name").trim().isLength({ min: 1, max: 100 }).escape(),
   body("email").trim().isEmail().normalizeEmail(),
