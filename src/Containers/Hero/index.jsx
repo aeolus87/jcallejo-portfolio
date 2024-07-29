@@ -67,7 +67,7 @@
           <h1 className="text-4xl lg:text-5xl font-bold mb-4">Julius Callejo</h1>
           <div className="text-xl lg:text-2xl font-semibold mb-4">
             <ReactTyped
-              strings={["Web Developer", "UI/UX Enthusiast", "Problem Solver"]}
+              strings={["Web Developer", "MERN stack", "Ye"]}
               typeSpeed={80}
               backSpeed={50}
               loop
