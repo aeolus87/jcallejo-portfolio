@@ -20,6 +20,14 @@ const projectData = [
     link: "https://navigenius.live",
     status: "active"
   },
+  {
+    id: 3,
+    title: "MeteoVerse",
+    description: "A simple weather forecast webapp",
+    image: "/img/meteo-verse.png", // Update the image path if necessary
+    link: "https://meteoverse.vercel.app/",
+    status: "active"
+  }
 ];
 
 const Projects = ({ theme }) => {
@@ -83,8 +91,8 @@ const Projects = ({ theme }) => {
               <h2 className="text-xl font-semibold mb-2">{project.title}</h2>
               <p className="mb-4">{project.description}</p>
               {project.status === "active" ? (
-                
-                 <a href={project.link}
+                <a
+                  href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`inline-block px-4 py-2 rounded ${
