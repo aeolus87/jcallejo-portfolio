@@ -19,9 +19,13 @@
     "nodemailer": "^6.9.3",
     "validator": "^13.9.0",
     "xss": "^1.0.14",
-    "cookie-parser": "^1.4.6"
+    "cookie-parser": "^1.4.6",
+    "ws": ">=8.17.1"
+
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "ws": ">=8.17.1"
+
   }
 }
