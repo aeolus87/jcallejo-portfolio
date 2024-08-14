@@ -6,7 +6,7 @@ import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 const projectData = [
   {
     id: 1,
-    title: "Yeniverse",
+    title: "YeNiverse",
     description: "A Kanye West fan site with an interactive timeline and more.",
     image: "/img/yeniverse-logo.png", 
     link: "https://yeniverse.vercel.app/",
