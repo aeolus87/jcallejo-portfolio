@@ -6,11 +6,11 @@ import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 const projectData = [
   {
     id: 1,
-    title: "yEZDL",
-    description: "A YouTube Video Crop and Download Tool",
-    image: "/img/yezdl-logo.png",
-    link: "https://yezdl.com",
-    status: "maintenance"
+    title: "Yeniverse",
+    description: "A Kanye West fan site with an interactive timeline and more.",
+    image: "/img/yeniverse-logo.png", 
+    link: "https://yeniverse.vercel.app/",
+    status: "active"
   },
   {
     id: 2,
@@ -27,8 +27,17 @@ const projectData = [
     image: "/img/meteo-verse.png", // Update the image path if necessary
     link: "https://meteoverse.vercel.app/",
     status: "active"
+  },
+  {
+    id: 4,
+    title: "yEZDL",
+    description: "A YouTube Video Crop and Download Tool",
+    image: "/img/yezdl-logo.png",
+    link: "https://yezdl.com",
+    status: "maintenance"
   }
 ];
+
 
 const Projects = ({ theme }) => {
   const navigate = useNavigate();
