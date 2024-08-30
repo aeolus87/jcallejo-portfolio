@@ -18,9 +18,10 @@
     "ws": ">=8.17.1"
   },
   "scripts": {
-    "start": "vite",
+    "dev": "vite",
+    "dev:open": "vite --open",
     "build": "vite build",
-    "serve": "vite preview"
+    "preview": "vite preview"
   },
   "browserslist": {
     "production": [
