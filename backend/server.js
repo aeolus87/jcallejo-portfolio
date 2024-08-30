@@ -9,7 +9,7 @@ const connectDB = require("./config/db");
 const contactRoutes = require("./routes/contact");
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = import.meta.env.PORT || 5000;
 app.set("trust proxy", 1);
 
 // Connect to MongoDB
@@ -17,7 +17,7 @@ connectDB();
 
 // CORS configuration
 const corsOptions = {
-  origin: process.env.FRONTEND_URL,
+  origin: import.meta.env.FRONTEND_URL,
   credentials: true,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
@@ -39,8 +39,8 @@ app.use("/api", limiter);
 // CSRF protection
 const csrfProtection = csrf({
   cookie: {
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: import.meta.env.NODE_ENV === "production",
+    sameSite: import.meta.env.NODE_ENV === "production" ? "none" : "lax",
   },
 });
 

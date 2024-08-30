@@ -1,10 +1,5 @@
-import React, { useState } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  AnimatePresence,
-} from "framer-motion";
+import React from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   FaHtml5,
   FaCss3Alt,
@@ -24,7 +19,6 @@ function About({ theme }) {
   const navigate = useNavigate();
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [0, 100], [1, 0]);
-  const [selectedSection, setSelectedSection] = useState(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -55,19 +49,19 @@ function About({ theme }) {
       title: "Who I Am",
       icon: FaUserGraduate,
       content:
-        "I'm Julius Callejo, a passionate student web developer currently pursuing a degree in Information Technology. With a strong foundation in web technologies, I'm dedicated to creating intuitive and dynamic user experiences. I thrive on problem-solving and continuously expanding my skill set to stay at the forefront of industry trends.",
+        "I'm Julius Callejo, a student web developer pursuing a degree in Information Technology. I'm passionate about creating intuitive user experiences and constantly expanding my skills in web technologies.",
     },
     {
       title: "My Journey",
       icon: FaRocket,
       content:
-        "My web development journey began with a fascination for creating interactive and visually appealing websites. As I progressed in my Information Technology studies, I discovered my passion for front-end development. I've tackled various projects, ranging from simple landing pages to complex web applications, always pushing myself to improve and adopt new technologies.",
+        "My web development journey started with a fascination for interactive websites. I've progressed from simple landing pages to complex web applications, always striving to improve and adopt new technologies.",
     },
     {
       title: "My Goals",
       icon: FaBullseye,
       content:
-        "As I continue to evolve as a web developer, my aim is to create web applications that not only look stunning but also deliver exceptional user experiences. I'm particularly intrigued by the convergence of web development with emerging technologies like AI and machine learning. The future of web development excites me, and I'm eager to contribute to innovative projects that push the boundaries of what's achievable on the web.",
+        "I aim to create web applications that are both visually stunning and highly functional. I'm excited about emerging technologies like AI in web development and eager to contribute to innovative projects in the field.",
     },
   ];
 
@@ -86,47 +80,23 @@ function About({ theme }) {
           About Me
         </motion.h1>
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
-          variants={itemVariants}
-        >
-          {sections.map((section, index) => (
+        <motion.div className="space-y-12 mb-16" variants={containerVariants}>
+          {sections.map((section) => (
             <motion.div
               key={section.title}
-              className={`p-6 rounded-lg shadow-lg cursor-pointer transition-all duration-300 ${
-                theme === "light"
-                  ? "bg-white hover:bg-gray-100"
-                  : "bg-gray-800 hover:bg-gray-700"
-              } ${selectedSection === index ? "ring-4 ring-blue-500" : ""}`}
-              whileHover={{ scale: 1.05 }}
-              onClick={() => setSelectedSection(index)}
+              className={`p-6 rounded-lg shadow-lg ${
+                theme === "light" ? "bg-white" : "bg-gray-800"
+              }`}
+              variants={itemVariants}
             >
-              <section.icon className="text-4xl mb-4 text-blue-500" />
-              <h2 className="text-2xl font-semibold mb-2">{section.title}</h2>
-              <p className="text-sm">Click to learn more</p>
+              <div className="flex items-center mb-4">
+                <section.icon className="text-4xl mr-4 text-blue-500" />
+                <h2 className="text-3xl font-semibold">{section.title}</h2>
+              </div>
+              <p className="text-lg leading-relaxed">{section.content}</p>
             </motion.div>
           ))}
         </motion.div>
-
-        <AnimatePresence mode="wait">
-          {selectedSection !== null && (
-            <motion.div
-              key={selectedSection}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className={`p-6 rounded-lg shadow-lg mb-16 ${
-                theme === "light" ? "bg-white" : "bg-gray-800"
-              }`}
-            >
-              <h3 className="text-2xl font-semibold mb-4">
-                {sections[selectedSection].title}
-              </h3>
-              <p className="text-lg">{sections[selectedSection].content}</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         <motion.section className="mb-16" variants={itemVariants}>
           <h2 className="text-3xl font-semibold mb-8 text-center">My Skills</h2>

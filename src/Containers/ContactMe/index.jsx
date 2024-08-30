@@ -77,7 +77,7 @@ const Contact = ({ theme }) => {
   const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/api/csrf-token`, {
+    fetch(`${import.meta.env.VITE_API_URL}/api/csrf-token`, {
       credentials: "include",
     })
       .then((response) => response.json())
@@ -95,7 +95,7 @@ const Contact = ({ theme }) => {
     (e) => {
       e.preventDefault();
 
-      fetch(`${process.env.REACT_APP_API_URL}/api/contact`, {
+      fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
